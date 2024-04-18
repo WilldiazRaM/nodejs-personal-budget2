@@ -17,7 +17,7 @@ let totalBugget = 25000;
 
 
 app.get('/', (req, res) => {
-    // res.send('Hola mundo!');
+     res.send('Hola mundo!');
 })
 
 
@@ -37,13 +37,12 @@ app.get('/envelopes', (req, res, next) => {
     res.send(envelopes);
 });
 
-
+//Update spefici envelopes
 app.put('/envelopes/:name', (req, res, next) => {
     const envelopeName = req.params.name; //El nombre del envolopes a actualizar
     const { name, amount } = req.body; //Datos a actualizar!
-    const envelopeIndex = envelopes.findIndex(envelope => {
-        envelope.name === envelopeName;
-    })
+    const envelopeIndex = envelopes.findIndex(envelope => envelope.name === envelopeName);
+
     if (envelopeIndex === -1) {
         return res.status(404).json({ error: 'Sobre no enontrado' });
     }

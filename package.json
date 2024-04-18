@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/WilldiazRaM/nodejs-personal-budget2/issues"
   },
-  "homepage": "https://github.com/WilldiazRaM/nodejs-personal-budget2#readme"
+  "homepage": "https://github.com/WilldiazRaM/nodejs-personal-budget2#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }
