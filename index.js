@@ -78,6 +78,47 @@ app.delete('/envelopes/:name', (req, res, next) =>{
 
 
 
+// Ruta para transferir presupuesto de un sobre a otro
+app.post('/envelopes/transfer/:from/:to', (req, res) => {
+    // Extrae los parámetros de la URL (sobres de origen y destino)
+    const fromName = req.params.from;
+    const toName = req.params.to;
+    // Extrae la cantidad a transferir del cuerpo de la solicitud
+    const amount = req.body.amount;
+
+    // Verifica que la cantidad sea un número válido y mayor que cero
+    if (typeof amount !== 'number' || amount <= 0) {
+        return res.status(400).json({ error: 'Cantidad inválida' });
+    }
+
+    // Encuentra los sobres de origen y destino
+    const fromEnvelope = envelopes.find(envelope => envelope.name === fromName);
+    const toEnvelope = envelopes.find(envelope => envelope.name === toName);
+
+    // Verifica si ambos sobres existen
+    if (!fromEnvelope || !toEnvelope) {
+        return res.status(404).json({ error: 'Uno o ambos sobres no encontrados' });
+    }
+
+    // Verifica si el sobre de origen tiene suficiente presupuesto
+    if (fromEnvelope.amount < amount) {
+        return res.status(400).json({ error: 'Presupuesto insuficiente en el sobre de origen' });
+    }
+
+    // Realiza la transferencia
+    fromEnvelope.amount -= amount; // Resta la cantidad del sobre de origen
+    toEnvelope.amount += amount; // Añade la cantidad al sobre de destino
+
+    // Responde con los sobres actualizados
+    res.json({
+        message: 'Transferencia realizada con éxito',
+        fromEnvelope: fromEnvelope,
+        toEnvelope: toEnvelope
+    });
+});
+
+
+
 app.listen(PORT, () => {
     console.log(`App is runing on http://localhost:${PORT}`);
 });
