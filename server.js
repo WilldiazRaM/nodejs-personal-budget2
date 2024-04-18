@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-
+const path = require('path');
 //Middleware
 app.use(bodyParser.json());
 
@@ -15,9 +15,8 @@ let envelopes = [
 
 let totalBugget = 25000;
 
-
 app.get('/', (req, res) => {
-     res.send('Hola mundo!');
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 })
 
 
@@ -86,7 +85,7 @@ app.post('/envelopes/transfer/:from/:to', (req, res) => {
     // Extrae la cantidad a transferir del cuerpo de la solicitud
     const amount = req.body.amount;
 
-    // Verifica que la cantidad sea un número válido y mayor que cero
+    // Verifica que la cantidad sea un número giválido y mayor que cero
     if (typeof amount !== 'number' || amount <= 0) {
         return res.status(400).json({ error: 'Cantidad inválida' });
     }
