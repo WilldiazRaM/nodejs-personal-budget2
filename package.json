@@ -1,0 +1,23 @@
+{
+  "name": "personal-bugget2",
+  "version": "1.0.1",
+  "description": "Proyecto en NodeJS express. Ejercicio de practica",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilldiazRaM/nodejs-personal-budget2.git"
+  },
+  "keywords": [
+    "express",
+    "nodejs"
+  ],
+  "author": "Willdiaz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WilldiazRaM/nodejs-personal-budget2/issues"
+  },
+  "homepage": "https://github.com/WilldiazRaM/nodejs-personal-budget2#readme"
+}
