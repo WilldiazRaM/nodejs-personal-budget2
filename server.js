@@ -5,6 +5,9 @@ const path = require('path');
 //Middleware
 app.use(bodyParser.json());
 
+// Servir archivos estáticos desde la carpeta "public"
+app.use(express.static(path.join(__dirname, 'public')));
+
 const PORT = process.env.PORT || 3000;
 
 let envelopes = [
