@@ -37,7 +37,7 @@ app.get('/envelopes', (req, res, next) => {
     res.send(envelopes);
 });
 
-//Update spefici envelopes
+//Update specific envelopes
 app.put('/envelopes/:name', (req, res, next) => {
     const envelopeName = req.params.name; //El nombre del envolopes a actualizar
     const { name, amount } = req.body; //Datos a actualizar!
@@ -57,6 +57,23 @@ app.put('/envelopes/:name', (req, res, next) => {
     // Envía el sobre actualizado como respuesta
     res.json(envelopes[envelopeIndex]);
 
+});
+
+//DELETE specific envelopes
+app.delete('/envelopes/:name', (req, res, next) =>{
+    const envelopeName = req.params.name; // El nombre del sobre a eliminar
+    const envelopeIndex = envelopes.findIndex(envelope => envelope.name === envelopeName);
+    
+    // Si no se encuentra el sobre, devuelve un 404
+    if (envelopeIndex === -1) {
+        return res.status(404).json({ error: 'Sobre no encontrado' });
+    }
+    
+    // Elimina el sobre del array
+    envelopes.splice(envelopeIndex, 1);
+    
+    // Responde con un código de estado 204 (sin contenido)
+    res.status(204).send();
 });
 
 
