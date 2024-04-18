@@ -1,1 +1,3 @@
-# nodejs-personal-budget2
+# Proyecto Personal Budget 2
+
+Proyecto para practicar NodeJS
