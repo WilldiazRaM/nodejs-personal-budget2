@@ -2,6 +2,11 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
+const morgan = require('morgan');
+
+app.use(morgan('combined'));
+
+
 //Middleware
 app.use(bodyParser.json());
 
@@ -119,7 +124,11 @@ app.post('/envelopes/transfer/:from/:to', (req, res) => {
     });
 });
 
-
+//Error handling
+app.use((err, req, res, next) => {
+    console.log(err.stack);
+    res.status(500).send('Algo anda mal');
+});
 
 app.listen(PORT, () => {
     console.log(`App is runing on http://localhost:${PORT}`);
